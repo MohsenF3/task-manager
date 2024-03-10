@@ -1,8 +1,14 @@
+"use client";
+
+import { Loader } from "@/components/loader";
 import AddTaskButton from "@/components/tasks/AddTaskButton";
 import Tasks from "@/components/tasks/Tasks";
+import { useTasksState } from "@/context/TasksContext";
 import { PlusIcon } from "@heroicons/react/24/outline";
 
 export default function AllTasks() {
+  const { tasks, isLoading } = useTasksState();
+
   return (
     <div className="w-full h-full py-5">
       {/* title */}
@@ -15,9 +21,7 @@ export default function AllTasks() {
       </div>
 
       {/* tasks */}
-      <div>
-        <Tasks />
-      </div>
+      <div>{isLoading.get ? <Loader /> : <Tasks tasks={tasks} />}</div>
     </div>
   );
 }

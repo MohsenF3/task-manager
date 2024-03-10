@@ -5,11 +5,12 @@ import {
   Button,
   Dialog,
   DialogHeader,
-  DialogFooter,
   DialogBody,
   Typography,
+  DialogFooter,
   Textarea,
   Input,
+  Spinner,
 } from "@material-tailwind/react";
 
 export {
@@ -17,9 +18,10 @@ export {
   Button,
   Dialog,
   DialogHeader,
-  DialogFooter,
   DialogBody,
   Typography,
   Textarea,
   Input,
+  DialogFooter,
+  Spinner,
 };

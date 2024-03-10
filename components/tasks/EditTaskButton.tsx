@@ -5,7 +5,7 @@ import { Tooltip } from "../material";
 import { PencilSquareIcon } from "@heroicons/react/24/outline";
 import TaskModal from "../TaskModal";
 
-export default function EditTaskButton() {
+export default function EditTaskButton({ id }: { id: string }) {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(!open);
@@ -23,7 +23,7 @@ export default function EditTaskButton() {
         </button>
       </Tooltip>
 
-      <TaskModal open={open} onOpen={handleOpen} taskType="edit" />
+      <TaskModal open={open} onOpen={handleOpen} taskType="edit" id={id} />
     </>
   );
 }
