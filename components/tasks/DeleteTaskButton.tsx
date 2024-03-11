@@ -53,7 +53,7 @@ export default function DeleteTaskButton({ id }: { id: string }) {
             variant="gradient"
             color="red"
             onClick={handleDelete}
-            disabled={isLoading.delete}
+            loading={isLoading.delete}
           >
             <span>Delete</span>
           </Button>

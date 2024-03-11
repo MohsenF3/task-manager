@@ -1,23 +1,35 @@
+import { GithubButton, GoogleButton } from "@/components/home/Button";
 import LoginForm from "@/components/home/LoginForm";
 import SocialLinks from "@/components/home/SocialLinks";
 
-export default function Home() {
+export default async function Home() {
   return (
     <div className=" w-full h-full pattern-container relative overflow-hidden px-5 md:p-0">
-      <div className="flex items-center justify-center flex-col gap-10 h-screen">
-        <h1 className="text-4xl font-semibold lg:text-5xl text-blue-600 text-center">
-          Join Us For Free And Manage Your Tasks!
-        </h1>
+      <div className="max-w-7xl mx-auto">
+        <div className="flex items-center justify-center flex-col gap-10 h-screen">
+          <h1 className="text-4xl font-semibold lg:text-5xl text-blue-600 text-center">
+            Join Us For Free And Manage Your Tasks!
+          </h1>
 
-        <LoginForm />
-      </div>
+          <div className="form-container max-w-sm  w-full">
+            <LoginForm />
 
-      <div className="flex flex-col gap-5 md:gap-0 md:flex-row  items-center justify-between px-20 absolute bottom-10 left-0 right-0">
-        <h3>
-          Created With <span className="text-red-500">&#10084;</span> By Mohsen
-        </h3>
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-6">
+              <GoogleButton />
 
-        <SocialLinks />
+              <GithubButton />
+            </div>
+          </div>
+        </div>
+
+        <div className="flex  gap-5 md:gap-0 flex-row px-5 items-center justify-between absolute bottom-6 left-0 right-0 max-w-7xl mx-auto">
+          <h3 className="font-semibold">
+            Created With <span className="text-red-500">&#10084;</span> By
+            Mohsen
+          </h3>
+
+          <SocialLinks />
+        </div>
       </div>
     </div>
   );

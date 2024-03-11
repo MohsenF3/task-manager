@@ -1,13 +1,17 @@
+import { auth } from "@/auth";
 import prisma from "@/lib/connect";
-import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
-
-const demoId = "5";
 
 export async function GET(req: Request) {
   try {
+    const session = await auth();
+
+    if (!session) {
+      return new Response("Not authenticated", { status: 401 });
+    }
+
     const tasks = await prisma.task.findMany({
-      where: { userId: demoId },
+      where: { userId: session?.user?.id },
     });
 
     return NextResponse.json(tasks);
@@ -23,6 +27,11 @@ export async function GET(req: Request) {
 export async function POST(req: Request) {
   try {
     const { title, description, date, isImportant } = await req.json();
+    const session = await auth();
+
+    if (!session) {
+      return new Response("Not authenticated", { status: 401 });
+    }
 
     const task = await prisma.task.create({
       data: {
@@ -31,7 +40,7 @@ export async function POST(req: Request) {
         date,
         isImportant,
         isCompleted: false,
-        userId: demoId,
+        userId: session?.user?.id as string,
       },
     });
     return NextResponse.json(task);

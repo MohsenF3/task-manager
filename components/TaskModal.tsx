@@ -1,6 +1,5 @@
 "use client";
 
-import { z } from "zod";
 import {
   Dialog,
   DialogHeader,
@@ -14,17 +13,9 @@ import {
 import { PlusIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { TaskModalProps } from "@/lib/definition";
+import { ModalFormFields, TaskModalProps } from "@/lib/definition";
 import { useTasksState } from "@/context/TasksContext";
-
-const FormSchema = z.object({
-  title: z.string().min(1, " Title Is Required"),
-  description: z.string().min(1, " Description Is Required"),
-  date: z.string().min(1, " Date Is Required"),
-  isImportant: z.boolean(),
-});
-
-type FormFields = z.infer<typeof FormSchema>;
+import { ModalFormSchema } from "@/lib/schema";
 
 export default function TaskModal({
   open,
@@ -40,17 +31,17 @@ export default function TaskModal({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormFields>({
+  } = useForm<ModalFormFields>({
     defaultValues: {
       title: taskType === "edit" ? task?.[0]?.title : "",
       description: taskType === "edit" ? task?.[0]?.description : "",
       date: taskType === "edit" ? task?.[0]?.date : "",
       isImportant: taskType === "edit" ? task?.[0]?.isImportant : false,
     },
-    resolver: zodResolver(FormSchema),
+    resolver: zodResolver(ModalFormSchema),
   });
 
-  const onSubmit: SubmitHandler<FormFields> = async (task) => {
+  const onSubmit: SubmitHandler<ModalFormFields> = async (task) => {
     if (taskType === "add") {
       onAdd(task);
     }
@@ -122,8 +113,8 @@ export default function TaskModal({
             color="green"
             placeholder=""
             className="flex items-center self-end gap-2 mt-5"
-            disabled={taskType === "add" ? isLoading.post : isLoading.put}
             type="submit"
+            loading={taskType === "add" ? isLoading.post : isLoading.put}
           >
             {taskType === "add" && <PlusIcon className="w-4 h-4" />}
             {taskType === "add" ? "Add Task" : "Save Changes"}

@@ -1,18 +1,69 @@
-import Image from "next/image";
+"use client";
+
+import { login } from "@/lib/actions";
 import { Input, Button } from "../material";
 
+import { SubmitHandler, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { LoginFormSchema } from "@/lib/schema";
+import { LoginFormFields } from "@/lib/definition";
+
 export default function LoginForm() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<LoginFormFields>({
+    defaultValues: {
+      name: "",
+      email: "",
+      image: "",
+    },
+    resolver: zodResolver(LoginFormSchema),
+  });
+
+  const onSubmit: SubmitHandler<LoginFormFields> = async (data) => {
+    await login(data);
+  };
+
   return (
-    <form className="form-container max-w-sm  w-full">
-      <Input label="Name" type="text" crossOrigin="" color="purple" />
-      <Input label="Email" type="email" crossOrigin="" color="purple" />
+    <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
+      <div>
+        <Input
+          label="Name"
+          type="text"
+          {...register("name")}
+          crossOrigin=""
+          color="purple"
+          className="text-white"
+        />
+        {errors.name && (
+          <p className="text-red-500 text-sm mt-2">{errors.name.message}</p>
+        )}
+      </div>
+      <div>
+        <Input
+          label="Email"
+          type="email"
+          {...register("email")}
+          crossOrigin=""
+          color="purple"
+          className="text-white"
+        />
+        {errors.email && (
+          <p className="text-red-500 text-sm mt-2">{errors.email.message}</p>
+        )}
+      </div>
+
+      <input type="text" className="hidden" {...register("image")} />
 
       <Button
         variant="gradient"
-        fullWidth
         color="purple"
         type="submit"
         placeholder=""
+        loading={isSubmitting}
+        className="justify-center"
       >
         Enter
       </Button>
@@ -21,34 +72,6 @@ export default function LoginForm() {
         <span className="block w-full bg-gray-200 h-[1px]"></span>
         <span className="font-bold whitespace-nowrap">OR WITH</span>
         <span className="block w-full bg-gray-200 h-[1px]"></span>
-      </div>
-
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-6">
-        <Button
-          variant="outlined"
-          color="purple"
-          placeholder=""
-          className="flex items-center gap-2 w-full p-3"
-        >
-          <Image src="/google.svg" alt="" width={20} height={20} />
-          <p className="text-white">Google</p>
-        </Button>
-
-        <Button
-          variant="outlined"
-          placeholder=""
-          color="purple"
-          className="flex items-center gap-2 w-full p-3"
-        >
-          <Image
-            src="/github.svg"
-            alt=""
-            width={20}
-            height={20}
-            className="invert"
-          />
-          <p className="text-white">Github</p>
-        </Button>
       </div>
     </form>
   );

@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function SocialLinks() {
   return (
-    <div className="flex items-center gap-10">
+    <div className="flex items-center gap-7">
       {/* instagram */}
       <div className="tooltip-container">
         <div className="tooltip">
@@ -11,20 +11,23 @@ export default function SocialLinks() {
               <div className="img">
                 <Image
                   src="/me.jpg"
-                  alt=""
+                  alt="Mohsen Image"
                   fill
                   className="object-cover rounded-[15px] border-[#e6683c]"
                 />
               </div>
               <div className="details">
-                <div className="name">User</div>
-                <div className="username">@_moh3en.fa</div>
+                <div className="name instagram">@_moh3en.fa</div>
               </div>
             </div>
           </div>
         </div>
         <div className="text">
-          <a className="icon" href="#">
+          <a
+            className="icon"
+            target="_blank"
+            href="https://www.instagram.com/_moh3en.fa"
+          >
             <div className="layer">
               <span></span>
               <span></span>
@@ -33,14 +36,14 @@ export default function SocialLinks() {
               <span className="instagramSVG ">
                 <Image
                   src="/instagram.svg"
-                  alt=""
-                  width={40}
-                  height={40}
+                  alt="Instagram Icon"
+                  width={30}
+                  height={30}
                   className="svgIcon invert"
                 />
               </span>
             </div>
-            <div className="text">Instagram</div>
+            <div className="text instagram">Instagram</div>
           </a>
         </div>
       </div>
@@ -53,20 +56,23 @@ export default function SocialLinks() {
               <div className="img github">
                 <Image
                   src="/me.jpg"
-                  alt=""
+                  alt="Mohsen Image"
                   fill
                   className="object-cover rounded-[15px] border-white"
                 />
               </div>
               <div className="details">
-                <div className="">User</div>
-                <div className="username">@MohsenF3</div>
+                <div className="name">@MohsenF3</div>
               </div>
             </div>
           </div>
         </div>
         <div className="text ">
-          <a className="icon" href="https://github.com/MohsenF3">
+          <a
+            className="icon"
+            target="_blank"
+            href="https://github.com/MohsenF3"
+          >
             <div className="layer github">
               <span></span>
               <span></span>
@@ -75,9 +81,9 @@ export default function SocialLinks() {
               <span className="githubSVG">
                 <Image
                   src="/github.svg"
-                  alt=""
-                  width={40}
-                  height={40}
+                  alt="Github Icon"
+                  width={30}
+                  height={30}
                   className="svgIcon invert"
                 />
               </span>

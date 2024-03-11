@@ -1,7 +1,7 @@
 "use client";
 
 import {
-  AddTaskProps,
+  ModalFormFields,
   Task,
   TasksContextType,
   UpdateCompletedProps,
@@ -24,7 +24,13 @@ export const TasksProvider = ({ children }: { children: React.ReactNode }) => {
     setIsLoading((preState) => ({ ...preState, get: true }));
     try {
       const response = await axios.get("/api/tasks");
-      setTasks(response.data);
+      const sortedData = response.data.sort((a: any, b: any) => {
+        return (
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
+      });
+
+      setTasks(sortedData);
     } catch (error) {
       console.log(error);
     } finally {
@@ -43,7 +49,7 @@ export const TasksProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const onAdd = async (task: AddTaskProps) => {
+  const onAdd = async (task: ModalFormFields) => {
     setIsLoading((preState) => ({ ...preState, post: true }));
     try {
       const response = await axios.post("/api/tasks", task);
@@ -57,7 +63,7 @@ export const TasksProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const onEdit = async (id: string, task: AddTaskProps) => {
+  const onEdit = async (id: string, task: ModalFormFields) => {
     setIsLoading((preState) => ({ ...preState, put: true }));
     try {
       const response = await axios.put(`/api/tasks/${id}`, task);
