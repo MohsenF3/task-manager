@@ -7,18 +7,21 @@ import {
   UpdateCompletedProps,
 } from "@/lib/definition";
 import axios from "axios";
+import { usePathname } from "next/navigation";
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 const TasksContext = createContext<TasksContextType | null>(null);
 
 export const TasksProvider = ({ children }: { children: React.ReactNode }) => {
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [showConfetti, setShowConfetti] = useState(false);
   const [isLoading, setIsLoading] = useState({
     get: false,
     put: false,
     post: false,
     delete: false,
   });
+  const pathname = usePathname();
 
   const fetchTasks = async () => {
     setIsLoading((preState) => ({ ...preState, get: true }));
@@ -68,8 +71,9 @@ export const TasksProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       const response = await axios.put(`/api/tasks/${id}`, task);
       if (response.data.error) {
-        alert(response.data.error);
+        console.log(response.data.error);
       }
+      setShowConfetti(false);
       setIsLoading((preState) => ({ ...preState, put: false }));
       fetchTasks();
     } catch (error) {
@@ -80,6 +84,7 @@ export const TasksProvider = ({ children }: { children: React.ReactNode }) => {
   const updateCompleted = async (task: UpdateCompletedProps) => {
     try {
       const response = await axios.put("/api/tasks", task);
+      setShowConfetti(task.isCompleted ? true : false);
       fetchTasks();
     } catch (error) {
       console.log(error);
@@ -90,9 +95,21 @@ export const TasksProvider = ({ children }: { children: React.ReactNode }) => {
     fetchTasks();
   }, []);
 
+  useEffect(() => {
+    setShowConfetti(false);
+  }, [pathname]);
+
   return (
     <TasksContext.Provider
-      value={{ tasks, isLoading, onDelete, onAdd, onEdit, updateCompleted }}
+      value={{
+        tasks,
+        isLoading,
+        onDelete,
+        onAdd,
+        onEdit,
+        updateCompleted,
+        showConfetti,
+      }}
     >
       {children}
     </TasksContext.Provider>

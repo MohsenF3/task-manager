@@ -33,7 +33,7 @@ export interface TasksContextType {
     post: boolean;
     delete: boolean;
   };
-
+  showConfetti: boolean;
   onDelete: (id: string) => void;
   onAdd: (task: ModalFormFields) => void;
   onEdit: (id: string, task: ModalFormFields) => void;

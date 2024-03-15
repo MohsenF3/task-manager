@@ -48,11 +48,17 @@ export const authConfig = {
           return false;
         }
       }
+
       return true;
     },
     async jwt({ token, user }) {
       if (user) {
-        token.id = user.id;
+        const userInfo = await prisma.user.findUnique({
+          where: {
+            email: user.email as string,
+          },
+        });
+        token.id = userInfo?.id;
       }
       return token;
     },
@@ -75,5 +81,5 @@ export const authConfig = {
     },
   },
 
-  providers: [], 
+  providers: [],
 } satisfies NextAuthConfig;

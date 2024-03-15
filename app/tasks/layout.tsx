@@ -4,7 +4,7 @@ import { TasksProvider } from "@/context/TasksContext";
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <TasksProvider>
-      <div className="flex h-screen flex-col md:flex-row md:overflow-hidden p-5">
+      <div className="flex h-screen flex-col md:gap-0 gap-5 md:flex-row md:overflow-hidden p-5">
         <div className="w-full flex-none md:w-60">
           <SideNav />
         </div>

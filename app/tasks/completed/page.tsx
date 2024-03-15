@@ -23,9 +23,7 @@ export default function Completed() {
       </div>
 
       {/* tasks */}
-      <div>
-        {isLoading.get ? <Loader /> : <Tasks tasks={completedTasks} />}
-      </div>
+      <div>{isLoading.get ? <Loader /> : <Tasks tasks={completedTasks} />}</div>
     </div>
   );
 }

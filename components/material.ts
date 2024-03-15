@@ -10,7 +10,6 @@ import {
   DialogFooter,
   Textarea,
   Input,
-  Spinner,
 } from "@material-tailwind/react";
 
 export {
@@ -23,5 +22,4 @@ export {
   Textarea,
   Input,
   DialogFooter,
-  Spinner,
 };
