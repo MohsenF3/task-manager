@@ -31,9 +31,6 @@ export const {
               email: email as string,
             },
           });
-
-          console.log(user);
-
           return user;
         } catch (error) {
           console.error("Failed to fetch user ");

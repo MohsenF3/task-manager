@@ -35,7 +35,7 @@ export default function TaskCard({
 
   return (
     <>
-      <div className="bg-[#181818] transition-all relative cursor-pointer hover:border-r-8 hover:border-r-green-500 duration-200 rounded-md p-4 flex flex-col justify-between min-h-48">
+      <div className="dark:bg-[#181818] bg-[#FBF9F1] relative rounded-md p-4 flex flex-col justify-between min-h-48">
         <p className="absolute left-1 -top-6 text-sm   font-bold">
           {formatDate(date)}
         </p>
@@ -50,7 +50,7 @@ export default function TaskCard({
                   mount: { scale: 1, y: 0 },
                   unmount: { scale: 0, y: 25 },
                 }}
-                className="text-green-400 font-medium"
+                className="font-medium bg-white text-dark dark:bg-black dark:text-white"
               >
                 <span className=" mx-auto mt-1 block h-4 w-4 animate-pulse rounded-full bg-green-900 content-[''] absolute top-0 right-1" />
               </Tooltip>
@@ -71,7 +71,7 @@ export default function TaskCard({
               mount: { scale: 1, y: 0 },
               unmount: { scale: 0, y: 25 },
             }}
-            className="font-medium text-white"
+            className="font-medium bg-white text-dark dark:bg-black dark:text-white"
           >
             <button
               className={`${

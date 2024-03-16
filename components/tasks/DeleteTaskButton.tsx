@@ -29,6 +29,7 @@ export default function DeleteTaskButton({ id }: { id: string }) {
           mount: { scale: 1, y: 0 },
           unmount: { scale: 0, y: 25 },
         }}
+        className="font-medium bg-white text-dark dark:bg-black dark:text-white"
       >
         <button className="group" onClick={handleOpen}>
           <TrashIcon className="w-6 h-6 group-hover:text-red-500" />

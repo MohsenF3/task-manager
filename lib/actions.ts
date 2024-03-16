@@ -26,6 +26,7 @@ export const login = async (data: LoginFormFields) => {
     });
 
     if (user) {
+      await signIn("credentials", { email });
       return;
     }
 

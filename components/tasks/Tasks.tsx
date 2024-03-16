@@ -14,7 +14,7 @@ export default function Tasks({ tasks }: { tasks: Task[] }) {
 
       {/* add task */}
 
-      <AddTaskButton style="flex min-h-48 items-center text-gray-400 hover:text-white transition-all duration-150 duration-150 justify-center rounded-md border border-gray-500 border-dashed">
+      <AddTaskButton style="flex min-h-48 items-center dark:text-gray-400 text-gray-500 hover:dark:text-white hover:text-gray-700 transition-all duration-150 duration-150 justify-center rounded-md border dark:border-gray-500 border-gray-700 border-dashed">
         <PlusIcon className="w-7 h-7" />
         <span>Add New Task</span>
       </AddTaskButton>
