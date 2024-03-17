@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import TaskModal from "../TaskModal";
+import TaskModal from "./TaskModal";
 
 export default function AddTaskButton({
   children,
@@ -13,6 +13,7 @@ export default function AddTaskButton({
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(!open);
+
   return (
     <>
       <button onClick={handleOpen} className={style}>

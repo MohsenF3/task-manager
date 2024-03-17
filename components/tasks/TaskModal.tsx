@@ -8,47 +8,46 @@ import {
   Typography,
   Textarea,
   Input,
-} from "./material";
+} from "../material";
 
 import { PlusIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ModalFormFields, TaskModalProps } from "@/lib/definition";
-import { useTasksState } from "@/context/TasksContext";
 import { ModalFormSchema } from "@/lib/schema";
+import { addTask, editTask } from "@/lib/actions";
 
 export default function TaskModal({
   open,
   onOpen,
   taskType,
   id,
+  task,
 }: TaskModalProps) {
-  const { onAdd, onEdit, tasks, isLoading } = useTasksState();
-
-  const task = tasks.filter((task) => task.id === id);
-
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<ModalFormFields>({
     defaultValues: {
-      title: taskType === "edit" ? task?.[0]?.title : "",
-      description: taskType === "edit" ? task?.[0]?.description : "",
-      date: taskType === "edit" ? task?.[0]?.date : "",
-      isImportant: taskType === "edit" ? task?.[0]?.isImportant : false,
+      title: taskType === "edit" ? task?.title : "",
+      description: taskType === "edit" ? task?.description : "",
+      date: taskType === "edit" ? task?.date : "",
+      isImportant: taskType === "edit" ? task?.isImportant : false,
     },
     resolver: zodResolver(ModalFormSchema),
   });
 
   const onSubmit: SubmitHandler<ModalFormFields> = async (task) => {
     if (taskType === "add") {
-      onAdd(task);
+      await addTask(task);
     }
 
     if (id) {
-      onEdit(id, task);
+      await editTask(id, task);
     }
+
+    onOpen();
   };
 
   return (
@@ -114,7 +113,7 @@ export default function TaskModal({
             placeholder=""
             className="flex items-center self-end gap-2 mt-5"
             type="submit"
-            loading={taskType === "add" ? isLoading.post : isLoading.put}
+            loading={isSubmitting}
           >
             {taskType === "add" && <PlusIcon className="w-4 h-4" />}
             {taskType === "add" ? "Add Task" : "Save Changes"}

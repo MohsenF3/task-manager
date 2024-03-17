@@ -6,6 +6,7 @@ export interface TaskModalProps {
   onOpen: () => void;
   taskType: "edit" | "add";
   id?: string;
+  task?: Task;
 }
 
 export interface Task {
@@ -15,8 +16,8 @@ export interface Task {
   date: string;
   isCompleted: boolean;
   isImportant: boolean;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date;
+  updatedAt: Date;
   userId: string;
 }
 

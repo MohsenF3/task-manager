@@ -1,13 +1,12 @@
-"use client";
-
 import PageHeader from "@/components/PageHeader";
 import { Loader } from "@/components/loader";
 import Tasks from "@/components/tasks/Tasks";
-import { useTasksState } from "@/context/TasksContext";
+import { getAllTasks } from "@/lib/data";
+import { Suspense } from "react";
 
-export default function Completed() {
-  const { isLoading, tasks } = useTasksState();
-  const completedTasks = tasks.filter((task) => task.isCompleted);
+export default async function Completed() {
+  const tasks = await getAllTasks();
+  const completedTasks = tasks?.filter((task) => task.isCompleted);
 
   return (
     <div className="w-full h-full py-5">
@@ -15,7 +14,9 @@ export default function Completed() {
       <PageHeader title="Completed Tasks" />
 
       {/* tasks */}
-      <div>{isLoading.get ? <Loader /> : <Tasks tasks={completedTasks} />}</div>
+      <Suspense fallback={<Loader />}>
+        <Tasks tasks={completedTasks!} />
+      </Suspense>
     </div>
   );
 }

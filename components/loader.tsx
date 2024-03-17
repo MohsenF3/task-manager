@@ -1,6 +1,6 @@
 export function Loader() {
   return (
-    <div className="h-[calc(100vh-23vh)] flex items-center justify-center">
+    <div className="h-[calc(100vh-23vh)] flex items-center justify-center ">
       <div className="loader">
         <div className="bar1"></div>
         <div className="bar2"></div>

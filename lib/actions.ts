@@ -1,11 +1,85 @@
 "use server";
 
-import { signIn, signOut } from "@/auth";
+import { auth, signIn, signOut } from "@/auth";
 import { AuthError } from "next-auth";
 import prisma from "./connect";
-import { LoginFormFields } from "./definition";
+import {
+  LoginFormFields,
+  ModalFormFields,
+  UpdateCompletedProps,
+} from "./definition";
+import { revalidatePath } from "next/cache";
 
-export const handleGithubLogin = async (formData: FormData) => {
+export const deleteTask = async (id: string) => {
+  try {
+    await prisma.task.delete({
+      where: {
+        id,
+      },
+    });
+    revalidatePath("/tasks");
+  } catch (error) {
+    console.log("Error While Deleting Task");
+  }
+};
+
+export const addTask = async (task: ModalFormFields) => {
+  const { title, description, date, isImportant } = task;
+  const session = await auth();
+
+  if (!session) {
+    return;
+  }
+
+  try {
+    await prisma.task.create({
+      data: {
+        title,
+        description,
+        date,
+        isImportant,
+        isCompleted: false,
+        userId: session?.user?.id as string,
+      },
+    });
+    revalidatePath("/tasks");
+  } catch (error) {
+    console.log("Error While Creating Task", error);
+  }
+};
+
+export const editTask = async (id: string, task: ModalFormFields) => {
+  try {
+    await prisma.task.update({
+      where: {
+        id,
+      },
+      data: task,
+    });
+    revalidatePath("/tasks");
+  } catch (error) {
+    console.log("Error While Updating Task");
+  }
+};
+
+export const updateTaskStatus = async (task: UpdateCompletedProps) => {
+  const { id, isCompleted } = task;
+  try {
+    await prisma.task.update({
+      where: {
+        id,
+      },
+      data: {
+        isCompleted: isCompleted,
+      },
+    });
+    revalidatePath("/tasks");
+  } catch (error) {
+    console.log("Error While Updating Task");
+  }
+};
+
+export const handleGithubLogin = async () => {
   await signIn("github");
 };
 

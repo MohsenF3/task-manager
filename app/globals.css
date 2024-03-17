@@ -4,7 +4,7 @@
 
 @layer utilities {
   .title {
-    @apply text-3xl relative after:absolute after:-bottom-2 after:rounded-md after:left-0 after:w-10 after:h-1 after:bg-green-400;
+    @apply md:text-3xl text-2xl relative after:absolute after:-bottom-2 after:rounded-md after:left-0 after:w-10 after:h-1 after:bg-green-400;
   }
 
   /*  pattern-container  */

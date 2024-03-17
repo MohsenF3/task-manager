@@ -5,7 +5,7 @@ import TaskCard from "./TaskCard";
 
 export default function Tasks({ tasks }: { tasks: Task[] }) {
   return (
-    <div className="grid gap-6 sm:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 py-5">
+    <div className="grid gap-7 md:gap-6 sm:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 py-5">
       {/* carts */}
 
       {tasks.map((task) => {

@@ -9,16 +9,16 @@ import {
   Button,
 } from "../material";
 import { TrashIcon } from "@heroicons/react/24/outline";
-import { useTasksState } from "@/context/TasksContext";
+import { deleteTask } from "@/lib/actions";
 
 export default function DeleteTaskButton({ id }: { id: string }) {
   const [open, setOpen] = useState(false);
-  const { onDelete, isLoading } = useTasksState();
 
   const handleOpen = () => setOpen(!open);
 
-  const handleDelete = () => {
-    onDelete(id);
+  const handleDelete = async () => {
+    await deleteTask(id);
+    handleOpen();
   };
 
   return (
@@ -54,7 +54,6 @@ export default function DeleteTaskButton({ id }: { id: string }) {
             variant="gradient"
             color="red"
             onClick={handleDelete}
-            loading={isLoading.delete}
           >
             <span>Delete</span>
           </Button>

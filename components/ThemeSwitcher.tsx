@@ -5,7 +5,8 @@ import { ChangeEvent, useEffect, useState } from "react";
 
 export default function ThemeSwitcher() {
   const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
+  const { systemTheme, theme, setTheme } = useTheme();
+  const currentTheme = theme === "system" ? systemTheme : theme;
 
   // useEffect only runs on the client, so now we can safely show the UI
   useEffect(() => {
@@ -26,7 +27,7 @@ export default function ThemeSwitcher() {
       <input
         type="checkbox"
         onChange={handleChange}
-        checked={theme === "light"}
+        checked={currentTheme === "light"}
       />
       <span className="slider dark:bg-[#181818] "></span>
     </label>
