@@ -41,5 +41,11 @@ export interface TasksContextType {
   updateCompleted: (task: UpdateCompletedProps) => void;
 }
 
+export interface BeforeInstallPromptEvent extends Event {
+  readonly platforms: ReadonlyArray<string>;
+  readonly userChoice: Promise<{ outcome: "accepted" | "dismissed" }>;
+  prompt(): Promise<void>;
+}
+
 export type ModalFormFields = z.infer<typeof ModalFormSchema>;
 export type LoginFormFields = z.infer<typeof LoginFormSchema>;

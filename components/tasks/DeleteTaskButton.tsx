@@ -13,11 +13,14 @@ import { deleteTask } from "@/lib/actions";
 
 export default function DeleteTaskButton({ id }: { id: string }) {
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleOpen = () => setOpen(!open);
 
   const handleDelete = async () => {
+    setLoading(true);
     await deleteTask(id);
+    setLoading(false);
     handleOpen();
   };
 
@@ -54,6 +57,7 @@ export default function DeleteTaskButton({ id }: { id: string }) {
             variant="gradient"
             color="red"
             onClick={handleDelete}
+            loading={loading}
           >
             <span>Delete</span>
           </Button>
