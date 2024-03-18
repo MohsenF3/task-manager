@@ -11,6 +11,7 @@ export const getTasks = async (): Promise<Task[]> => {
       "X-User-ID": session?.user?.id as string,
     },
     cache: "force-cache",
+    next: { tags: ["tasks"] },
   });
 
   if (!response.ok) {

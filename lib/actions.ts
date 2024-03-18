@@ -8,7 +8,7 @@ import {
   ModalFormFields,
   UpdateCompletedProps,
 } from "./definition";
-import { revalidatePath } from "next/cache";
+import { revalidateTag } from "next/cache";
 
 export const deleteTask = async (id: string) => {
   try {
@@ -17,7 +17,7 @@ export const deleteTask = async (id: string) => {
         id,
       },
     });
-    revalidatePath("/tasks");
+    revalidateTag("tasks");
   } catch (error) {
     console.log("Error While Deleting Task");
   }
@@ -42,7 +42,7 @@ export const addTask = async (task: ModalFormFields) => {
         userId: session?.user?.id as string,
       },
     });
-    revalidatePath("/tasks");
+    revalidateTag("tasks");
   } catch (error) {
     console.log("Error While Creating Task", error);
   }
@@ -56,7 +56,7 @@ export const editTask = async (id: string, task: ModalFormFields) => {
       },
       data: task,
     });
-    revalidatePath("/tasks");
+    revalidateTag("tasks");
   } catch (error) {
     console.log("Error While Updating Task");
   }
@@ -73,7 +73,7 @@ export const updateTaskStatus = async (task: UpdateCompletedProps) => {
         isCompleted: isCompleted,
       },
     });
-    revalidatePath("/tasks");
+    revalidateTag("tasks");
   } catch (error) {
     console.log("Error While Updating Task");
   }
