@@ -1,11 +1,11 @@
 import PageHeader from "@/components/PageHeader";
 import { Loader } from "@/components/loader";
 import Tasks from "@/components/tasks/Tasks";
-import { getAllTasks } from "@/lib/data";
+import { getTasks } from "@/lib/data";
 import { Suspense } from "react";
 
 export default async function Completed() {
-  const tasks = await getAllTasks();
+  const tasks = await getTasks();
   const completedTasks = tasks?.filter((task) => task.isCompleted);
 
   return (

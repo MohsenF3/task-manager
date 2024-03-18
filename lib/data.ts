@@ -1,38 +1,31 @@
 import { auth } from "@/auth";
-import prisma from "./connect";
 import { Task } from "./definition";
-import { cache } from "react";
 
-export const getAllTasks = cache(async () => {
-  try {
-    const session = await auth();
+export const getTasks = async (): Promise<Task[]> => {
+  const session = await auth();
 
-    if (!session) {
-      return;
-    }
+  const response = await fetch("http://localhost:3000/api/data", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "X-User-ID": session?.user?.id as string,
+    },
+    cache: "force-cache",
+  });
 
-    const tasks = await prisma.task.findMany({
-      where: { userId: session?.user?.id },
-    });
-
-    const sortedTasks = tasks.sort((a: Task, b: Task) => {
-      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-    });
-
-    return sortedTasks;
-  } catch (error) {
-    console.log(error);
+  if (!response.ok) {
+    throw new Error("Failed To Fetch tasks");
   }
-});
 
-export const getTask = cache(async (id: string) => {
-  try {
-    const task = await prisma.task.findUnique({
-      where: { id },
-    });
+  return response.json();
+};
 
-    return task;
-  } catch (error) {
-    console.log(error);
+export const getTask = async (id: string): Promise<Task> => {
+  const response = await fetch(`http://localhost:3000/api/data/${id}`);
+
+  if (!response.ok) {
+    throw new Error("Failed To Fetch task");
   }
-});
+
+  return response.json();
+};

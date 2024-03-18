@@ -27,6 +27,7 @@ export default function TaskModal({
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<ModalFormFields>({
     defaultValues: {
@@ -50,8 +51,15 @@ export default function TaskModal({
     onOpen();
   };
 
+  const handleModal = () => {
+    if (taskType === "add") {
+      reset();
+    }
+    onOpen();
+  };
+
   return (
-    <Dialog open={open} size="xs" handler={onOpen} placeholder="">
+    <Dialog open={open} size="xs" handler={handleModal} placeholder="">
       <div className="flex items-center justify-between">
         <DialogHeader placeholder="" className="flex flex-col items-start">
           <Typography className="mb-1" variant="h4" placeholder="">
@@ -94,6 +102,7 @@ export default function TaskModal({
               label="Date"
               type="date"
               crossOrigin=""
+              className=""
             />
             {errors.date && (
               <p className="text-red-500 mt-2 text-sm">{errors.date.message}</p>
