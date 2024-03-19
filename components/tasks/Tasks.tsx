@@ -9,7 +9,7 @@ export default function Tasks({ tasks }: { tasks: Task[] }) {
       {/* carts */}
 
       {tasks.map((task) => {
-        return <TaskCard key={task.id} {...task} />;
+        return <TaskCard key={task.id} task={task} />;
       })}
 
       {/* add task */}

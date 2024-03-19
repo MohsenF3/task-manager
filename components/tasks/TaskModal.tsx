@@ -21,7 +21,6 @@ export default function TaskModal({
   open,
   onOpen,
   taskType,
-  id,
   task,
 }: TaskModalProps) {
   const {
@@ -39,16 +38,17 @@ export default function TaskModal({
     resolver: zodResolver(ModalFormSchema),
   });
 
-  const onSubmit: SubmitHandler<ModalFormFields> = async (task) => {
+  const onSubmit: SubmitHandler<ModalFormFields> = async (taskData) => {
     if (taskType === "add") {
-      await addTask(task);
+      await addTask(taskData);
     }
 
-    if (id) {
-      await editTask(id, task);
+    if (task?.id) {
+      await editTask(task.id, taskData);
     }
 
     onOpen();
+    reset();
   };
 
   const handleModal = () => {

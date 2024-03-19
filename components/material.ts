@@ -10,6 +10,7 @@ import {
   DialogFooter,
   Textarea,
   Input,
+  Checkbox,
 } from "@material-tailwind/react";
 
 export {
@@ -22,4 +23,5 @@ export {
   Textarea,
   Input,
   DialogFooter,
+  Checkbox,
 };
