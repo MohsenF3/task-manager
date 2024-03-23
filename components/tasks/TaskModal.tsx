@@ -15,11 +15,11 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ModalFormFields, TaskModalProps } from "@/lib/definition";
 import { ModalFormSchema } from "@/lib/schema";
-import { addTask, editTask } from "@/lib/actions";
 
 import DateInput from "./DateInput";
 import { DateObject } from "react-multi-date-picker";
 import { formatDate } from "@/lib/utils";
+import { useTasksState } from "@/context/TasksProvider";
 
 export default function TaskModal({
   open,
@@ -27,6 +27,7 @@ export default function TaskModal({
   taskType,
   task,
 }: TaskModalProps) {
+  const { addOptimisticTask, editOptimisticTask } = useTasksState();
   const {
     register,
     handleSubmit,
@@ -50,14 +51,14 @@ export default function TaskModal({
     const formatDate = taskData.date.format() as any;
 
     if (taskType === "add") {
-      await addTask({
+      addOptimisticTask({
         ...taskData,
         date: formatDate,
       });
     }
 
     if (task?.id) {
-      await editTask(task.id, {
+      editOptimisticTask(task.id, {
         ...taskData,
         date: formatDate,
       });

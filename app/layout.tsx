@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Sans_Arabic } from "next/font/google";
 import "./globals.css";
 import PWAModal from "@/components/PWAModal";
-import { ThemeProviders } from "@/provider/ThemeProvider";
+import { ThemeProviders } from "@/context/ThemeProvider";
 
 const sansArabic = IBM_Plex_Sans_Arabic({
   style: "normal",

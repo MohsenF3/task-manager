@@ -1,43 +1,29 @@
 "use client";
 
 import { useState } from "react";
-import {
-  Tooltip,
-  Dialog,
-  DialogHeader,
-  DialogFooter,
-  Button,
-} from "../material";
+import { Dialog, DialogHeader, DialogFooter, Button } from "../material";
 import { TrashIcon } from "@heroicons/react/24/outline";
-import { deleteTask } from "@/lib/actions";
+import { useTasksState } from "@/context/TasksProvider";
+import CustomTooltip from "../CustomTooltip";
 
 export default function DeleteTaskButton({ id }: { id: string }) {
   const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const { deleteOptimisticTask } = useTasksState();
 
   const handleOpen = () => setOpen(!open);
 
   const handleDelete = async () => {
-    setLoading(true);
-    await deleteTask(id);
-    setLoading(false);
+    deleteOptimisticTask(id);
     handleOpen();
   };
 
   return (
     <>
-      <Tooltip
-        content="حذف کردن"
-        animate={{
-          mount: { scale: 1, y: 0 },
-          unmount: { scale: 0, y: 25 },
-        }}
-        className="font-medium bg-white text-dark dark:bg-black dark:text-white"
-      >
+      <CustomTooltip title="حذف کردن">
         <button className="group" onClick={handleOpen}>
           <TrashIcon className="w-6 h-6 group-hover:text-red-500" />
         </button>
-      </Tooltip>
+      </CustomTooltip>
 
       <Dialog
         open={open}
@@ -66,7 +52,6 @@ export default function DeleteTaskButton({ id }: { id: string }) {
             variant="gradient"
             color="red"
             onClick={handleDelete}
-            loading={loading}
             ripple={true}
           >
             <span>حذف کردن</span>

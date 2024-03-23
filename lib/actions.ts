@@ -36,7 +36,7 @@ export const addTask = async (task: ModalFormFields) => {
       data: {
         title,
         description,
-        date,
+        date: date as unknown as string,
         isImportant,
         isCompleted: false,
         userId: session?.user?.id as string,
@@ -54,7 +54,7 @@ export const editTask = async (id: string, task: ModalFormFields) => {
       where: {
         id,
       },
-      data: task,
+      data: task as unknown as string,
     });
     revalidateTag("tasks");
   } catch (error) {

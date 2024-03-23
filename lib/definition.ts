@@ -31,5 +31,18 @@ export interface BeforeInstallPromptEvent extends Event {
   prompt(): Promise<void>;
 }
 
+export interface TasksContextType {
+  tasks: Task[] | null;
+  isLoading: boolean;
+  addOptimisticTask: (data: ModalFormFields) => void;
+  deleteOptimisticTask: (id: string) => void;
+  editOptimisticTask: (id: string, data: ModalFormFields) => void;
+  editOptimisticStatus: (id: string, isCompleted: boolean) => void;
+}
+
+export interface TasksProps {
+  type: "all" | "important" | "completed" | "incompleted";
+}
+
 export type ModalFormFields = z.infer<typeof ModalFormSchema>;
 export type LoginFormFields = z.infer<typeof LoginFormSchema>;

@@ -1,14 +1,40 @@
+"use client";
+
 import { PlusIcon } from "@heroicons/react/24/outline";
 import AddTaskButton from "./AddTaskButton";
-import { Task } from "@/lib/definition";
 import TaskCard from "./TaskCard";
+import { useTasksState } from "@/context/TasksProvider";
+import { Loader } from "../loader";
+import { Task, TasksProps } from "@/lib/definition";
 
-export default function Tasks({ tasks }: { tasks: Task[] }) {
+export default function Tasks({ type }: TasksProps) {
+  const { tasks: allTasks, isLoading } = useTasksState();
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
+  let tasks = allTasks;
+
+  switch (type) {
+    case "important":
+      tasks = allTasks?.filter((task) => task.isImportant) as Task[];
+      break;
+    case "completed":
+      tasks = allTasks?.filter((task) => task.isCompleted) as Task[];
+      break;
+    case "incompleted":
+      tasks = allTasks?.filter((task) => !task.isCompleted) as Task[];
+      break;
+    default:
+      break;
+  }
+
   return (
     <div className="grid gap-7 md:gap-6 sm:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 py-5">
       {/* carts */}
 
-      {tasks.map((task) => {
+      {tasks?.map((task) => {
         return <TaskCard key={task.id} task={task} />;
       })}
 
