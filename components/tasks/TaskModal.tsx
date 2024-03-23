@@ -50,6 +50,7 @@ export default function TaskModal({
   const onSubmit: SubmitHandler<ModalFormFields> = async (taskData) => {
     const formatDate = taskData.date.format() as any;
 
+    // if user want to add new task
     if (taskType === "add") {
       addOptimisticTask({
         ...taskData,
@@ -57,6 +58,7 @@ export default function TaskModal({
       });
     }
 
+    // if user want to edit existing task
     if (task?.id) {
       editOptimisticTask(task.id, {
         ...taskData,
@@ -64,14 +66,19 @@ export default function TaskModal({
       });
     }
 
+    // close and reset the modal after successful submit
     onOpen();
     reset();
   };
 
+  // control the modal when leaving the modal
   const handleModal = () => {
+    // if user want to add and then leave without adding anything reset the modal
     if (taskType === "add") {
       reset();
     }
+
+    // close the modal anyway
     onOpen();
   };
 

@@ -10,6 +10,7 @@ import {
 } from "./definition";
 import { revalidateTag } from "next/cache";
 
+// delete task action
 export const deleteTask = async (id: string) => {
   try {
     await prisma.task.delete({
@@ -23,12 +24,13 @@ export const deleteTask = async (id: string) => {
   }
 };
 
+// add task action
 export const addTask = async (task: ModalFormFields) => {
   const { title, description, date, isImportant } = task;
   const session = await auth();
 
   if (!session) {
-    return;
+    throw new Error("User not authenticated!");
   }
 
   try {
@@ -48,6 +50,7 @@ export const addTask = async (task: ModalFormFields) => {
   }
 };
 
+// edit task action
 export const editTask = async (id: string, task: ModalFormFields) => {
   try {
     await prisma.task.update({
@@ -62,6 +65,7 @@ export const editTask = async (id: string, task: ModalFormFields) => {
   }
 };
 
+// update isCompleted status of the task action
 export const updateTaskStatus = async (task: UpdateCompletedProps) => {
   const { id, isCompleted } = task;
   try {
@@ -79,18 +83,22 @@ export const updateTaskStatus = async (task: UpdateCompletedProps) => {
   }
 };
 
+// login with github
 export const handleGithubLogin = async () => {
   await signIn("github");
 };
 
+// login with google
 export const handleGoogleLogin = async () => {
   await signIn("google");
 };
 
+// logout action
 export const handleLogout = async () => {
   await signOut();
 };
 
+// login action
 export const login = async (data: LoginFormFields) => {
   const { name, email, image } = data;
 
@@ -99,11 +107,13 @@ export const login = async (data: LoginFormFields) => {
       where: { email: email as string },
     });
 
+    // if user exist signIn
     if (user) {
       await signIn("credentials", { email });
       return;
     }
 
+    // if user not exist create one and sign in
     await prisma.user.create({
       data: {
         name: name as string,

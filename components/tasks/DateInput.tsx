@@ -41,8 +41,11 @@ export default function DateInput({
 
             return props;
           }}
+          // remove the arrow
           arrow={false}
+          // unable the user to change the date in input
           editable={false}
+          // show animation
           animations={[
             opacity(),
             transition({

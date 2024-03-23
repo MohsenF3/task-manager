@@ -11,16 +11,19 @@ import Error from "../error";
 export default function Tasks({ type }: TasksProps) {
   const { tasks: allTasks, error, isLoading } = useTasksState();
 
+  // if loading is true return Loader
   if (isLoading) {
     return <Loader />;
   }
 
+  // if error is true return Error
   if (error) {
     return <Error />;
   }
 
   let tasks = allTasks;
 
+  // set tasks base on the type passed to this component.
   switch (type) {
     case "important":
       tasks = allTasks?.filter((task) => task.isImportant) as Task[];

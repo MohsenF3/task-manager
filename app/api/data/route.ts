@@ -9,10 +9,12 @@ export async function GET(req: NextRequest) {
   try {
     const session = await auth();
 
+    // if no session found(user not exist)
     if (!session?.user) {
-      throw new Error("User ID is missing");
+      throw new Error("User is not authenticated");
     }
 
+    // find the task of the user
     const tasks = await prisma.task.findMany({
       where: { userId: session.user.id },
       orderBy: { createdAt: "desc" },

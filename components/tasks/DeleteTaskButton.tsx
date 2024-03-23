@@ -12,6 +12,7 @@ export default function DeleteTaskButton({ id }: { id: string }) {
 
   const handleOpen = () => setOpen(!open);
 
+  // delete the task and close the modal
   const handleDelete = async () => {
     deleteOptimisticTask(id);
     handleOpen();
