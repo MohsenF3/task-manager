@@ -23,7 +23,7 @@ export default async function Home() {
         </div>
 
         <div className="flex  gap-5 md:gap-0 flex-row px-5 items-center justify-between absolute bottom-6 left-0 right-0 max-w-7xl mx-auto">
-          <h3 className="font-semibold text-white">
+          <h3 className="font-semibold text-white text-sm md:text-base">
             ! ساخته شده با <span className="text-red-500">&#10084;</span> توسط
             محسن !
           </h3>
