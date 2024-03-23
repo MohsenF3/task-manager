@@ -1,6 +1,7 @@
 "use client";
 
 import { addTask, deleteTask, editTask, updateTaskStatus } from "@/lib/actions";
+import { BASE_API_URL } from "@/lib/constants";
 import { ModalFormFields, Task, TasksContextType } from "@/lib/definition";
 import {
   createContext,
@@ -10,22 +11,19 @@ import {
   ReactNode,
 } from "react";
 
-const BASE_API_URL = process.env.NEXT_PUBLIC_BASE_API_URL;
-
 const TasksContext = createContext<TasksContextType | null>(null);
 
 export const TasksProvider = ({ children }: { children: ReactNode }) => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [isLoading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   const fetchTasks = async () => {
-    if (!BASE_API_URL) {
-      return null;
-    }
+    if (!BASE_API_URL && !tasks) return null;
     const response = await fetch(`${BASE_API_URL}/api/data`);
 
     if (!response.ok) {
-      throw new Error("Failed To Fetch tasks");
+      setError(true);
     }
 
     setTasks(await response.json());
@@ -95,6 +93,7 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
     <TasksContext.Provider
       value={{
         tasks,
+        error,
         isLoading,
         addOptimisticTask,
         deleteOptimisticTask,

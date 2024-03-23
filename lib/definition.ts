@@ -34,6 +34,7 @@ export interface BeforeInstallPromptEvent extends Event {
 export interface TasksContextType {
   tasks: Task[] | null;
   isLoading: boolean;
+  error: boolean;
   addOptimisticTask: (data: ModalFormFields) => void;
   deleteOptimisticTask: (id: string) => void;
   editOptimisticTask: (id: string, data: ModalFormFields) => void;

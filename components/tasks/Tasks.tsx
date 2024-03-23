@@ -6,12 +6,17 @@ import TaskCard from "./TaskCard";
 import { useTasksState } from "@/context/TasksProvider";
 import { Loader } from "../loader";
 import { Task, TasksProps } from "@/lib/definition";
+import Error from "../error";
 
 export default function Tasks({ type }: TasksProps) {
-  const { tasks: allTasks, isLoading } = useTasksState();
+  const { tasks: allTasks, error, isLoading } = useTasksState();
 
   if (isLoading) {
     return <Loader />;
+  }
+
+  if (error) {
+    return <Error />;
   }
 
   let tasks = allTasks;
