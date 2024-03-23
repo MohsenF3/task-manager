@@ -1,4 +1,4 @@
-import React from "react";
+import { ReactNode } from "react";
 import { Tooltip } from "./material";
 
 export default function CustomTooltip({
@@ -6,7 +6,7 @@ export default function CustomTooltip({
   children,
 }: {
   title: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
     <Tooltip

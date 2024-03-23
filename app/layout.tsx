@@ -3,6 +3,7 @@ import { IBM_Plex_Sans_Arabic } from "next/font/google";
 import "./globals.css";
 import PWAModal from "@/components/PWAModal";
 import { ThemeProviders } from "@/context/ThemeProvider";
+import { ReactNode } from "react";
 
 const sansArabic = IBM_Plex_Sans_Arabic({
   style: "normal",
@@ -23,7 +24,7 @@ export const viewport: Viewport = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html lang="fa" suppressHydrationWarning>

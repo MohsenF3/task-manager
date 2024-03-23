@@ -2,17 +2,26 @@
 
 import { addTask, deleteTask, editTask, updateTaskStatus } from "@/lib/actions";
 import { ModalFormFields, Task, TasksContextType } from "@/lib/definition";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  ReactNode,
+} from "react";
 
 const BASE_API_URL = process.env.NEXT_PUBLIC_BASE_API_URL;
 
 const TasksContext = createContext<TasksContextType | null>(null);
 
-export const TasksProvider = ({ children }: { children: React.ReactNode }) => {
+export const TasksProvider = ({ children }: { children: ReactNode }) => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [isLoading, setLoading] = useState(true);
 
   const fetchTasks = async () => {
+    if (!BASE_API_URL) {
+      return null;
+    }
     const response = await fetch(`${BASE_API_URL}/api/data`);
 
     if (!response.ok) {

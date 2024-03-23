@@ -1,7 +1,8 @@
 import SideNav from "@/components/SideNav";
+import { ReactNode } from "react";
 import { TasksProvider } from "@/context/TasksProvider";
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function Layout({ children }: { children: ReactNode }) {
   return (
     <div className="flex h-screen flex-col md:gap-0 gap-5 md:flex-row md:overflow-hidden p-5 max-w-[1500px] mx-auto w-full">
       <div className="w-full flex-none md:w-60">

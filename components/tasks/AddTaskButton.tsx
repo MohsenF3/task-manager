@@ -1,13 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, ReactNode } from "react";
 import TaskModal from "./TaskModal";
 
 export default function AddTaskButton({
   children,
   style,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   style: string;
 }) {
   const [open, setOpen] = useState(false);
