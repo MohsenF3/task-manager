@@ -1,10 +1,14 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { IBM_Plex_Sans_Arabic } from "next/font/google";
 import "./globals.css";
-import Provider from "@/components/ThemeProvider";
 import PWAModal from "@/components/PWAModal";
+import { ThemeProviders } from "@/provider/ThemeProvider";
 
-const inter = Inter({ subsets: ["latin"] });
+const sansArabic = IBM_Plex_Sans_Arabic({
+  style: "normal",
+  weight: ["100", "200", "300", "400", "500", "600", "700"],
+  subsets: ["arabic"],
+});
 
 export const metadata: Metadata = {
   manifest: "/manifest.json",
@@ -22,12 +26,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="fa" suppressHydrationWarning>
       <body
-        className={`${inter.className} dark:bg-[#181818] bg-[#FBF9F1] dark:text-white overflow-x-hidden`}
+        dir="rtl"
+        className={`${sansArabic.className} dark:bg-[#181818] bg-[#FBF9F1] dark:text-white overflow-x-hidden`}
       >
         <PWAModal />
-        <Provider>{children}</Provider>
+        <ThemeProviders>{children}</ThemeProviders>
       </body>
     </html>
   );

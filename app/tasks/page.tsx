@@ -11,7 +11,7 @@ export default async function AllTasks() {
   return (
     <div className="w-full h-full py-5">
       {/* title */}
-      <PageHeader title="All Tasks" />
+      <PageHeader title="تمام کار ها" />
 
       {/* tasks */}
 

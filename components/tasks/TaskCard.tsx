@@ -5,13 +5,13 @@ import DeleteTaskButton from "./DeleteTaskButton";
 import EditTaskButton from "./EditTaskButton";
 import { Tooltip, Checkbox } from "../material";
 import { Task } from "@/lib/definition";
-import { formatDate } from "@/lib/utils";
 import { updateTaskStatus } from "@/lib/actions";
 import Fireworks from "react-canvas-confetti/dist/presets/fireworks";
 import {
   TCanvasConfettiInstance,
   TConductorInstance,
 } from "react-canvas-confetti/dist/types";
+import { formatMonthDate } from "@/lib/utils";
 
 export default function TaskCard({ task }: { task: Task }) {
   const controller = useRef<TConductorInstance | null>(null);
@@ -46,22 +46,22 @@ export default function TaskCard({ task }: { task: Task }) {
     <>
       <div className="dark:bg-[#181818] bg-[#FBF9F1] rounded-md p-4 flex flex-col justify-between min-h-48">
         <div className="mb-7 relative">
-          <p className="absolute left-0 -top-9 text-sm   font-bold">
-            {formatDate(optimisticTask.date)}
+          <p className="absolute right-0 -top-9 text-sm   font-bold">
+            {formatMonthDate(optimisticTask.date)}
           </p>
           {/* title */}
           <div className="flex items-center justify-between relative">
             <h3 className="text-xl font-medium">{optimisticTask.title}</h3>
             {optimisticTask.isImportant && (
               <Tooltip
-                content="Important"
+                content="مهم"
                 animate={{
                   mount: { scale: 1, y: 0 },
                   unmount: { scale: 0, y: 25 },
                 }}
                 className="font-medium bg-white text-dark dark:bg-black dark:text-white"
               >
-                <span className=" mx-auto mt-1 block h-4 w-4 animate-pulse rounded-full bg-green-900 content-[''] absolute -top-3 -right-2" />
+                <span className=" mx-auto mt-1 block h-4 w-4 animate-pulse rounded-full bg-green-900 content-[''] absolute -top-3 -left-2" />
               </Tooltip>
             )}
           </div>
@@ -74,13 +74,22 @@ export default function TaskCard({ task }: { task: Task }) {
         <div className="flex items-center justify-between">
           {/* left */}
 
-          <Checkbox
-            defaultChecked={optimisticTask.isCompleted}
-            color="green"
-            crossOrigin=""
-            onChange={(event) => startTransition(() => handleChange(event))}
-            label={optimisticTask.isCompleted ? "Completed" : "Incompleted"}
-          />
+          <Tooltip
+            content="تغییر وضعیت"
+            animate={{
+              mount: { scale: 1, y: 0 },
+              unmount: { scale: 0, y: 25 },
+            }}
+            className="font-medium bg-white text-dark dark:bg-black dark:text-white"
+          >
+            <Checkbox
+              defaultChecked={optimisticTask.isCompleted}
+              color="green"
+              crossOrigin=""
+              onChange={(event) => startTransition(() => handleChange(event))}
+              label={optimisticTask.isCompleted ? "کامل شده" : "کامل نشده"}
+            />
+          </Tooltip>
 
           {/* right */}
           <div className="flex items-center gap-3">

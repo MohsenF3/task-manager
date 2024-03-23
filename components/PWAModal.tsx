@@ -70,14 +70,15 @@ export default function PWAModal() {
         size="xs"
         handler={handleOpen}
         placeholder=""
-        className="top-5 right-5 fixed"
+        className="top-5 right-5 fixed dark:bg-[#181818] bg-[#FBF9F1] dark:text-white"
       >
         <DialogHeader placeholder="" className="flex flex-col items-start">
-          <Typography placeholder="" variant="h4">
-            Install The App
-          </Typography>
-          <Typography placeholder="" variant="small">
-            Click below to install the app.
+          <Typography
+            placeholder=""
+            variant="h4"
+            className="dark:text-white mb-3"
+          >
+            برنامه را نصب کنید!
           </Typography>
         </DialogHeader>
 
@@ -86,9 +87,10 @@ export default function PWAModal() {
             placeholder=""
             variant="text"
             onClick={handleOpen}
-            className="mr-2"
+            className="ml-2 dark:text-white dark:hover:bg-gray-800"
+            ripple={true}
           >
-            <span>Cancel</span>
+            <span>لغو</span>
           </Button>
 
           <Button
@@ -96,8 +98,9 @@ export default function PWAModal() {
             variant="gradient"
             color="green"
             onClick={handleInstallApp}
+            ripple={true}
           >
-            <span>Install</span>
+            <span>نصب کردن</span>
           </Button>
         </DialogFooter>
       </Dialog>

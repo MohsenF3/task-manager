@@ -12,7 +12,7 @@ export default async function Important() {
     <div className="w-full h-full py-5">
       {/* title */}
 
-      <PageHeader title="Important Tasks" />
+      <PageHeader title="مهم ها" />
 
       {/* tasks */}
       <Suspense fallback={<Loader />}>

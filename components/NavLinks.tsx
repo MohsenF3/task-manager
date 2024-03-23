@@ -10,14 +10,18 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const links = [
-  { name: "All Tasks", href: "/tasks", icon: HomeIcon },
+  { name: "تمام کار ها", href: "/tasks", icon: HomeIcon },
   {
-    name: "Important",
+    name: "مهم ها",
     href: "/tasks/important",
     icon: ListBulletIcon,
   },
-  { name: "Completed", href: "/tasks/completed", icon: CheckIcon },
-  { name: "Do It Now", href: "/tasks/incompleted", icon: DocumentTextIcon },
+  { name: "تمام شده ها", href: "/tasks/completed", icon: CheckIcon },
+  {
+    name: "حالا انجام بده",
+    href: "/tasks/incompleted",
+    icon: DocumentTextIcon,
+  },
 ];
 
 export default function NavLinks() {

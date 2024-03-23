@@ -11,7 +11,7 @@ export default async function SideNav() {
 
   return (
     <div className="flex h-full shadow-xl flex-col px-3 py-4 md:px-2 dark:bg-gray-900 bg-[#E5E1DA] rounded-md ">
-      {/* tops */}
+      {/* top */}
       <div className="mb-2 flex flex-row justify-between items-center md:flex-col md:justify-normal md:items-baseline   gap-3 h-20 rounded-md text-white  p-3 md:h-40">
         <div className="flex items-center gap-4">
           <div className="w-16 h-16 relative">
@@ -26,7 +26,9 @@ export default async function SideNav() {
             {session?.user?.name}
           </span>
         </div>
-        <div className="self-end">
+
+        {/* switch theme button on mobile screen */}
+        <div className="block md:hidden">
           <SwitchTheme />
         </div>
       </div>
@@ -36,6 +38,11 @@ export default async function SideNav() {
         <NavLinks />
         <div className="hidden h-auto w-full grow rounded-md  md:block"></div>
 
+        {/* switch theme button on desktop screen */}
+        <div className="md:block hidden">
+          <SwitchTheme />
+        </div>
+
         {/* auth button */}
         <form action={handleLogout}>
           <button
@@ -43,7 +50,7 @@ export default async function SideNav() {
             type="submit"
           >
             <PowerIcon className="w-6" />
-            <div className="hidden md:block">Sign Out</div>
+            <div className="hidden md:block">خارج شدن</div>
           </button>
         </form>
       </div>

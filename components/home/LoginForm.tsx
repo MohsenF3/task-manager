@@ -27,11 +27,16 @@ export default function LoginForm() {
   };
 
   return (
-    <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className="flex flex-col gap-4"
+      onSubmit={handleSubmit(onSubmit)}
+      dir="rtl"
+    >
       <div>
         <Input
-          label="Name"
+          label="نام"
           type="text"
+          variant="standard"
           {...register("name")}
           crossOrigin=""
           color="purple"
@@ -43,8 +48,9 @@ export default function LoginForm() {
       </div>
       <div>
         <Input
-          label="Email"
+          label="ایمیل"
           type="email"
+          variant="standard"
           {...register("email")}
           crossOrigin=""
           color="purple"
@@ -65,12 +71,12 @@ export default function LoginForm() {
         loading={isSubmitting}
         className="justify-center"
       >
-        Enter
+        وارد شوید
       </Button>
 
       <div className="flex items-center justify-between gap-2 mt-2 mb-6">
         <span className="block w-full bg-gray-200 h-[1px]"></span>
-        <span className="font-bold whitespace-nowrap">OR WITH</span>
+        <span className="font-bold whitespace-nowrap">یا</span>
         <span className="block w-full bg-gray-200 h-[1px]"></span>
       </div>
     </form>

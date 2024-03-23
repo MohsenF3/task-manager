@@ -14,7 +14,7 @@ export default function EditTaskButton({ task }: { task: Task }) {
   return (
     <>
       <Tooltip
-        content="Edit Task"
+        content="ویرایش کردن"
         animate={{
           mount: { scale: 1, y: 0 },
           unmount: { scale: 0, y: 25 },

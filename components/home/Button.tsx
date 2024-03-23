@@ -20,7 +20,7 @@ export const GithubButton = () => {
           height={20}
           className="invert"
         />
-        <p className="text-white">Github</p>
+        <p className="text-white">گیت هاب</p>
       </Button>
     </form>
   );
@@ -37,7 +37,7 @@ export const GoogleButton = () => {
         type="submit"
       >
         <Image src="/google.svg" alt="Google Icon" width={20} height={20} />
-        <p className="text-white">Google</p>
+        <p className="text-white">گوگل</p>
       </Button>
     </form>
   );

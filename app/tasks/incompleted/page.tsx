@@ -12,7 +12,7 @@ export default async function Incompleted() {
     <div className="w-full h-full py-5">
       {/* title */}
 
-      <PageHeader title="Incompleted Tasks" />
+      <PageHeader title="حالا انجام بده" />
 
       {/* tasks */}
       <Suspense fallback={<Loader />}>

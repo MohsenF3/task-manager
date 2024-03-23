@@ -27,7 +27,7 @@ export default function DeleteTaskButton({ id }: { id: string }) {
   return (
     <>
       <Tooltip
-        content="Delete Task"
+        content="حذف کردن"
         animate={{
           mount: { scale: 1, y: 0 },
           unmount: { scale: 0, y: 25 },
@@ -39,17 +39,26 @@ export default function DeleteTaskButton({ id }: { id: string }) {
         </button>
       </Tooltip>
 
-      <Dialog open={open} size="xs" handler={handleOpen} placeholder="">
-        <DialogHeader placeholder="">Are You Sure?</DialogHeader>
+      <Dialog
+        open={open}
+        size="xs"
+        handler={handleOpen}
+        placeholder=""
+        className="dark:bg-[#181818] bg-[#FBF9F1] dark:text-white"
+      >
+        <DialogHeader placeholder="" className="dark:text-white">
+          آیا مطمئن هستید؟
+        </DialogHeader>
 
         <DialogFooter placeholder="">
           <Button
             placeholder=""
             variant="text"
             onClick={handleOpen}
-            className="mr-2"
+            className="ml-2 dark:text-white dark:hover:bg-gray-800"
+            ripple={true}
           >
-            <span>Cancel</span>
+            <span>بازگشت</span>
           </Button>
 
           <Button
@@ -58,8 +67,9 @@ export default function DeleteTaskButton({ id }: { id: string }) {
             color="red"
             onClick={handleDelete}
             loading={loading}
+            ripple={true}
           >
-            <span>Delete</span>
+            <span>حذف کردن</span>
           </Button>
         </DialogFooter>
       </Dialog>

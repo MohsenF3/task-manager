@@ -11,7 +11,7 @@ export default async function Completed() {
   return (
     <div className="w-full h-full py-5">
       {/* title */}
-      <PageHeader title="Completed Tasks" />
+      <PageHeader title="تمام شده ها" />
 
       {/* tasks */}
       <Suspense fallback={<Loader />}>

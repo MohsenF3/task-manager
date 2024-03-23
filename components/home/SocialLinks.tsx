@@ -43,7 +43,7 @@ export default function SocialLinks() {
                 />
               </span>
             </div>
-            <div className="text instagram">Instagram</div>
+            <div className="text instagram">اینستاگرام</div>
           </a>
         </div>
       </div>
@@ -88,7 +88,7 @@ export default function SocialLinks() {
                 />
               </span>
             </div>
-            <div className="text">Github</div>
+            <div className="text whitespace-nowrap">گیت هاب</div>
           </a>
         </div>
       </div>
